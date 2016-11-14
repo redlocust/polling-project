@@ -1,0 +1,16 @@
+extends layout
+
+block title
+
+    title List of polls
+
+block content
+    .container
+        p Below are polls.
+        p Select a poll to see the results and vote, or sign-in to make a new poll.
+
+        ul.list-group
+
+            each poll in polls
+                a.list-group-item(href="/polls/#{poll.id}")= poll.question
+                    span.pull-right= poll.id

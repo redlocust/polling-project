@@ -1,0 +1,20 @@
+extends layout
+
+block title
+    title List of polls
+
+
+block content
+    .container
+        -d3c()
+        p= poll.question
+        p I'd like to vote for...:
+        div#chart
+            .dropdown
+                button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') Choose an option:
+                    span.caret
+                ul.dropdown-menu(aria-labelledby='dropdownMenu1')
+
+                    each val, i in Object.keys(poll.answers)
+                        li
+                            a(href='#')= val

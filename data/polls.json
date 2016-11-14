@@ -1,0 +1,46 @@
+[
+  {
+    "id": "123-234-345",
+    "question": "Are you cat?",
+    "answers": [
+      {
+        "label": "yes meow",
+        "count": 2
+      },
+      {
+        "label": "no meow",
+        "count": 3
+      }
+    ]
+  },
+
+  {
+    "id": "123-234-346",
+    "question": "Are you dog?",
+    "answers": [
+      {
+        "label": "yes gauuu",
+        "count": 4
+      },
+      {
+        "label": "no gauuu",
+        "count": 5
+      }
+    ]
+  },
+
+  {
+    "id": "123-234-347",
+    "question": "Are you tree?",
+    "answers": [
+      {
+        "label": "yes sssss",
+        "count": 6
+      },
+      {
+        "label": "no ssss",
+        "count": 7
+      }
+    ]
+  }
+]

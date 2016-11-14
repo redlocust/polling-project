@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+    head
+
+        block title
+        link(href='/css/bootstrap.min.css', rel='stylesheet')
+    body
+        .container
+            nav.navbar.navbar-default
+                .navbar-header
+                    a.navbar-brand(href='/') VoteRex
+                ul.nav.navbar-nav
+                    li.active
+                        a(href='/') Home
+
+        block content
+
+        script(src="/jquery.min.js")
+        script(src="/js/bootstrap.min.js")
