@@ -9,11 +9,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "d3": "^4.3.0",
     "d3-chart": "0.0.1",
     "express": "^4.14.0",
+    "install": "^0.8.2",
     "jade": "^1.11.0",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.6.8",
+    "node-uuid": "^1.4.7"
   }
 }

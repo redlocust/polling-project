@@ -12,11 +12,11 @@ block content
 
         div#chart
 
-        form.form-horizontal
+        form.form-horizontal(method='post')
             .form-group
-            select.form-control
+            select.form-control(name="choice")
                 each val, i in (poll.answers)
-                    option=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
+                    option(name="name")=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
             button(type="submit").btn.btn-primary Submit
 
     script(data-require='d3@*', data-semver='4.0.0', src='https://d3js.org/d3.v4.min.js')

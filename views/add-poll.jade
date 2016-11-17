@@ -1,0 +1,19 @@
+extends layout
+
+block title
+
+    title Add new poll
+
+block content
+    .container
+        h1 Make a new poll!
+
+        form(method='post')
+            .form-group
+                label(for="question") Title:
+                input(type="text", name="question").form-control#poll-title
+            .form-group
+                label(for="answers") Options (seperated by line):
+                textarea(name="answers", cols="80", rows="20")#poll-text.form-control
+
+            button.btn.btn-primary Make!
