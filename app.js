@@ -1,15 +1,16 @@
-//TODO Crit Add MongoDB
+//DO Crit Add MongoDB
 //TODO Crit Passport support
-//TODO Crit Добавить сохранение выборов
+//TODO Crit Добавить сохранение выборов для пользователя
 //TODO Crit Авторизация через Твиттер
 
-//TODO Err Не работает вид элемента
-//TODO Err Диаграмма работает только с двумя выборами
-//TODO Err Добавить пробел в поле с описанием в списке голосований
+//DO Err Не работает вид элемента
+//DO Err Диаграмма работает только с двумя выборами
+//DO Err Добавить пробел в поле с описанием в списке голосований
 //TODO Err Сделать инициализацию. Чтобы было хотя бы одно голосование
+//TODO Err Проверить на ошибки ввода
 
 //TODO Enhan Добавить React или Angular
-//TODO Удаление голосований
+//DO Удаление голосований
 //TODO Обработка ошибок в URL (404)
 
 var express = require('express');
@@ -19,9 +20,15 @@ var app = express();
 var bodyParser = require("body-parser");
 //var polls = require('./data/polls.json');
 
-var Polls = require("./mongoose.js");
+var Polls = require("./models/polls");
 
 var uuid4 = require("node-uuid");
+
+var passport = require('passport');
+
+var session = require('express-session');
+
+//var configDB = require('./config/database.js');
 
 app.set('view engine', 'jade');
 
@@ -32,30 +39,20 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 
 
+// required for passport
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
 app.get('/', function (req, res) {
-
-  // var newPoll = Polls({
-  //   "id": "000000000001111",
-  //   "question": "question",
-  //   "answers": [
-  //     {"label": 555, "count": 5},
-  //     {"label": 333, "count": 6}
-  //   ]
-  // });
-
-  // newPoll.save(function (err) {
-  //   if (err) throw err;
-  //
-  //   console.log('Poll created!');
-  // });
 
   res.redirect('/polls');
 });
 
 
 app.get('/polls', function (req, res) {
-
-  //var polls = [];
 
   Polls.find({}, function (err, polls) {
     if (err) throw err;
@@ -71,43 +68,46 @@ app.get('/polls', function (req, res) {
 
 app.get('/polls/:id', function (req, res) {
 
-  var poll;
   var id = req.params.id;
 
-  polls.forEach(function (elem) {
-    if (elem.id === id) {
-      poll = elem;
-    }
+  Polls.find({"id": id}, function (err, polls) {
+    if (err) throw err;
+
+    var poll = polls[0];
+
+    res.render('poll-item', {
+      "poll": poll
+    });
   });
 
-  res.render('poll-item', {
-    "poll": poll
-  });
 });
 
 
 app.post('/polls/:id', function (req, res) {
 
-  var poll;
   var id = req.params.id;
 
-  polls.forEach(function (elem) {
-    if (elem.id === id) {
+  Polls.findOne({"id": id}, function (err, poll) {
+    if (err) throw err;
 
-      poll = elem;
+    var choises = poll.answers;
+    choises.forEach(function (choice) {
+      if (choice.label === req.body.choice) {
+        poll.markModified('answers');
+        choice.count = choice.count + 1;
+      }
+    });
 
-      var choises = elem.answers;
-      choises.forEach(function (choice) {
-        if (choice.label === req.body.choice) {
-          choice.count = choice.count + 1;
-        }
-      })
-    }
+    poll.save(function (err) {
+      if (err) throw err;
+
+      console.log('Poll successfully updated!');
+    });
+
+    res.redirect('/polls/' + id);
+
   });
 
-  res.render('poll-item', {
-    "poll": poll
-  });
 });
 
 
@@ -147,6 +147,31 @@ app.post('/add-poll', function (req, res) {
   res.redirect('/polls/' + uuid);
 
 });
+
+app.get('/polls/delete/:idPoll', function (req, res) {
+
+  var idPoll = req.params.idPoll;
+
+  Polls.findOne({"id": idPoll}, function (err, poll) {
+    if(err) throw err;
+
+    poll.remove(function (err) {
+      if(err) throw err;
+      console.log("Poll delete");
+    });
+  });
+
+  res.redirect('/polls');
+});
+
+
+app.get('/login', function(req, res) {
+  res.send('Go back and register!');
+});
+
+
+// routes ======================================================================
+  require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
 app.listen(3000);

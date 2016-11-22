@@ -15,7 +15,7 @@ block content
         form.form-horizontal(method='post')
             .form-group
             select.form-control(name="choice")
-                each val, i in (poll.answers)
+                each val, i in poll.answers
                     option(name="name")=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
             button(type="submit").btn.btn-primary Submit
 
