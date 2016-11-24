@@ -18,17 +18,16 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require("body-parser");
-//var polls = require('./data/polls.json');
+
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/polling");
 
 var Polls = require("./models/polls");
+var User = require("./models/user");
 
 var uuid4 = require("node-uuid");
-
 var passport = require('passport');
-
 var session = require('express-session');
-
-//var configDB = require('./config/database.js');
 
 app.set('view engine', 'jade');
 
@@ -39,15 +38,7 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-
 app.get('/', function (req, res) {
-
   res.redirect('/polls');
 });
 
@@ -131,7 +122,6 @@ app.post('/add-poll', function (req, res) {
     }
   });
 
-
   var newPoll = Polls({
     "id": uuid,
     "question": question,
@@ -166,13 +156,12 @@ app.get('/polls/delete/:idPoll', function (req, res) {
 
 
 app.get('/login', function(req, res) {
-  res.send('Go back and register!');
+  res.render('login');
 });
 
-
-// routes ======================================================================
-  require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
+app.post('/login', function(req, res) {
+  res.send('login');
+});
 
 app.listen(3000);
 console.log('server starts at http://localhost:3000');
