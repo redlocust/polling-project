@@ -14,7 +14,6 @@
 //TODO Обработка ошибок в URL (404)
 
 var express = require('express');
-//require('bootstrap')
 var app = express();
 
 var bodyParser = require("body-parser");
@@ -34,6 +33,12 @@ app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./auth");
+require("./auth-init");
+
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 
@@ -41,7 +46,6 @@ app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 app.get('/', function (req, res) {
   res.redirect('/polls');
 });
-
 
 app.get('/polls', function (req, res) {
 
@@ -143,10 +147,10 @@ app.get('/polls/delete/:idPoll', function (req, res) {
   var idPoll = req.params.idPoll;
 
   Polls.findOne({"id": idPoll}, function (err, poll) {
-    if(err) throw err;
+    if (err) throw err;
 
     poll.remove(function (err) {
-      if(err) throw err;
+      if (err) throw err;
       console.log("Poll delete");
     });
   });
@@ -155,13 +159,17 @@ app.get('/polls/delete/:idPoll', function (req, res) {
 });
 
 
-app.get('/login', function(req, res) {
+app.get('/login', function (req, res) {
   res.render('login');
 });
 
-app.post('/login', function(req, res) {
-  res.send('login');
-});
+
+app.post('/login',
+  passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    }
+  ));
 
 app.listen(3000);
 console.log('server starts at http://localhost:3000');
