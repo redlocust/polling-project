@@ -3,10 +3,12 @@ var passport = require('passport')
 
 var User = require('./models/user');
 
+
+
 passport.use(new LocalStrategy(
   function (username, password, done) {
 
-    User.findOne({"username": "123"}, function (err, user) {
+    User.findOne({username: username}, function (err, user) {
       if (err) {
         return done(err);
       }
@@ -25,17 +27,18 @@ passport.use(new LocalStrategy(
       if (user.password != password) {
         return done(null, false, {message: 'Invalid password'});
       }
+      console.log("login");
       return done(null, user);
     });
   }
 ));
 
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
+passport.serializeUser(function(user, done){
+  done(null, user._id);
 });
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
+passport.deserializeUser(function(id, done){
+  User.findById(id, function(err, user){
+    if(err || !user) return done(err, null);
+    done(null, user);
   });
 });

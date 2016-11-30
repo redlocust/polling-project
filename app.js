@@ -14,30 +14,39 @@
 //TODO Обработка ошибок в URL (404)
 
 var express = require('express');
-var app = express();
-
-var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/polling");
+
+// var twilio = require('twilio');
+// var client = twilio('MG80c0f6a465e0191e99ab09cd4f27c9a8', 'TWILIO_AUTH_TOKEN');
+
+var TMClient = require('textmagic-rest-client');
 
 var Polls = require("./models/polls");
 var User = require("./models/user");
 
 var uuid4 = require("node-uuid");
 var passport = require('passport');
-var session = require('express-session');
 
-app.set('view engine', 'jade');
 
-app.use(bodyParser.urlencoded({extended: true}));
+var bodyParser = require("body-parser");
+
+require("./auth");
+
+var app = express();
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./auth");
-require("./auth-init");
+app.set('view engine', 'jade');
 
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
@@ -105,11 +114,28 @@ app.post('/polls/:id', function (req, res) {
 
 });
 
+app.get('/login', function(req, res){
+    res.render('login');
+  });
 
-app.get('/add-poll', function (req, res) {
-  res.render('add-poll');
+
+app.post('/login',
+  passport.authenticate('local',
+    {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    }
+  )
+);
+
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
+app.get('/add-poll',require('connect-ensure-login').ensureLoggedIn(),function (req, res) {
+    res.render('add-poll');
+});
 
 app.post('/add-poll', function (req, res) {
 
@@ -135,6 +161,11 @@ app.post('/add-poll', function (req, res) {
   newPoll.save(function (err) {
     if (err) throw err;
 
+    var c = new TMClient('alexred', '7uuYXTPgUHgBNZIZmTOv0bII19qJ2S');
+    c.Messages.send({text: question, phones:'+79109449465'}, function(err, res){
+      console.log('Messages.send()', err, res);
+    });
+
     console.log('Poll created!');
   });
 
@@ -158,18 +189,6 @@ app.get('/polls/delete/:idPoll', function (req, res) {
   res.redirect('/polls');
 });
 
-
-app.get('/login', function (req, res) {
-  res.render('login');
-});
-
-
-app.post('/login',
-  passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/login'
-    }
-  ));
 
 app.listen(3000);
 console.log('server starts at http://localhost:3000');
