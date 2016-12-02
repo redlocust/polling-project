@@ -8,7 +8,7 @@ block content
     .container
         p Below are polls.
         p Select a poll to see the results and vote, or
-            a(href="/add-poll") &nbsp; sign-in to make a new poll.
+            a(href="/admin/add") &nbsp; sign-in to make a new poll.
 
         ul.list-group
 
@@ -16,5 +16,5 @@ block content
                 .row
                     a.list-group-item.col-md-11(href="/polls/#{poll.id}")= poll.question
                         span.pull-right= poll.id
-                    a.list-group-item.col-md-1(href="/polls/delete/#{poll.id}")
+                    a.list-group-item.col-md-1(href="/admin/delete/#{poll.id}")
                         span.glyphicon.glyphicon-remove

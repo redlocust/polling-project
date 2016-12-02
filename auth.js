@@ -1,44 +1,34 @@
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+var express = require("express");
+var passport = require("passport");
 
-var User = require('./models/user');
+var router = express.Router();
+module.exports = router;
 
-
-
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-
-    User.findOne({username: username}, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-
-      console.log(user);
-
-    });
-
-    User.findOne({username: username}, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {message: 'Incorrect username.'});
-      }
-      if (user.password != password) {
-        return done(null, false, {message: 'Invalid password'});
-      }
-      console.log("login");
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser(function(user, done){
-  done(null, user._id);
+router.get('/login', function(req, res){
+  res.render('login');
 });
-passport.deserializeUser(function(id, done){
-  User.findById(id, function(err, user){
-    if(err || !user) return done(err, null);
-    done(null, user);
+
+
+router.post('/login',
+  passport.authenticate('local',
+    {
+      successRedirect: '/',
+      failureRedirect: '/auth/login'
+    }
+  )
+);
+
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+router.get('/twitter',
+  passport.authenticate('twitter'));
+
+router.get('/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
   });
-});

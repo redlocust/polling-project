@@ -4,19 +4,29 @@ html(lang='en')
 
         block title
         link(href='/css/bootstrap.min.css', rel='stylesheet')
+        link(href='./style.css', rel='stylesheet')
     body
         .container
-            nav.navbar.navbar-default
-                .navbar-header
-                    a.navbar-brand(href='/') VoteRex
-                ul.nav.navbar-nav
-                    li.active
-                        a(href='/') Home
-                    li
-                        a(href='/login') Twitter
-                ul.nav.navbar-nav.navbar-right
-                    li
-                        a(href='/logout') Logout
+            .row
+                .col-md-8.col-md-offset-2
+                    nav.navbar.navbar-default
+                        .navbar-header
+                            a.navbar-brand(href='/') VoteRex
+
+                        ul.nav.navbar-nav
+                            li.active
+                                a(href='/') Home
+                        ul.nav.navbar-nav.navbar-right
+                            li
+                                a(href='/auth/login').btn.btn-default Login
+                            li
+                                a(href='/auth/twitter').btn.btn-default.btn-twitter Twitter
+                            li
+                                a(href='/auth/logout').btn.btn-default Logout
+                                if user
+                                    = user.username
+                                else
+                                    | Not Logged
 
         block content
 
