@@ -28,7 +28,8 @@ router.post('/add', function (req, res) {
   var newPoll = Polls({
     "id": uuid,
     "question": question,
-    "answers": answers
+    "answers": answers,
+    "userId": req.user._id
   });
 
   newPoll.save(function (err) {
@@ -37,7 +38,7 @@ router.post('/add', function (req, res) {
     var c = new TMClient('alexred', '7uuYXTPgUHgBNZIZmTOv0bII19qJ2S');
     c.Messages.send({
       text: question,
-      phones: '+79109449465'
+      phones: '+79202756885'
     }, function (err, res) {
       console.log('Messages.send()', err, res);
     });

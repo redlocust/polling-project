@@ -18,6 +18,7 @@ block content
                         .row
                             a.list-group-item.col-md-11(href="/polls/#{poll.id}")= poll.question
                                 span.pull-right= poll.id
+
                             if admin
-                                a.list-group-item.col-md-1(href="/admin/delete/#{poll.id}")
-                                    span.glyphicon.glyphicon-remove
+                            a.list-group-item.col-md-1(href="/admin/delete/#{poll.id}")
+                                span.glyphicon.glyphicon-remove

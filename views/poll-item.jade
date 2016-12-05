@@ -7,17 +7,23 @@ block title
 block content
     script(data-require='d3@*', data-semver='4.0.0', src='https://d3js.org/d3.v4.min.js')
     .container
-        p= poll.question
-        p I'd like to vote for...:
+        .raw
+            .col-md-8.col-md-offset-2
+                p= poll.question
+                p I'd like to vote for...:
+        .raw
+            .col-md-5.col-md-offset-2
 
-        div#chart
+                form.form-horizontal(method='post')
+                    .form-group
+                    select.form-control(name="choice")
+                        each val, i in poll.answers
+                            option(name="name")=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
+                    button(type="submit").btn.btn-primary Submit
 
-        form.form-horizontal(method='post')
-            .form-group
-            select.form-control(name="choice")
-                each val, i in poll.answers
-                    option(name="name")=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
-            button(type="submit").btn.btn-primary Submit
+            .col-md-3.col
+
+                div#chart
 
     script(data-require='d3@*', data-semver='4.0.0', src='https://d3js.org/d3.v4.min.js')
     script.

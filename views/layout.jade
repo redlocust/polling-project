@@ -21,12 +21,16 @@ html(lang='en')
                                 a(href='/auth/login').btn.btn-default Login
                             li
                                 a(href='/auth/twitter').btn.btn-default.btn-twitter Twitter
-                            li
-                                a(href='/auth/logout').btn.btn-default Logout
-                                if user
-                                    = user.username
-                                else
-                                    | Not Logged
+
+                            if user
+
+                                li
+                                    a(href='/polls/mypolls').btn.btn-default MyPolls
+
+                                li
+                                    a(href='/auth/logout').btn.btn-default Logout
+                                        span
+                                            = " " + user.username
 
         block content
 

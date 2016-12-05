@@ -6,7 +6,8 @@ var userSchema = new Schema(
   {
     username: String,
     password: String,
-    twitterId: String
+    twitterId: String,
+    admin: Boolean
   }
 );
 

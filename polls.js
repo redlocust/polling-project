@@ -1,16 +1,35 @@
 var express = require("express");
 
 var Polls = require("./models/polls");
+var User = require("./models/user");
 
 var router = express.Router();
 module.exports = router;
 
 router.get('/polls', function (req, res) {
 
+  var admin = false;
+
+  if (typeof req.user !== "undefined") admin = req.user.admin;
+
   Polls.find({}, function (err, polls) {
     if (err) throw err;
 
     res.render('poll-list', {
+      "polls": polls,
+      "admin": admin
+    });
+
+  });
+
+});
+
+router.get("/polls/mypolls", function (req, res) {
+
+  Polls.find({"userId": req.user._id}, function (err, polls) {
+    if (err) throw err;
+
+    res.render('poll-mylist', {
       "polls": polls
     });
 
