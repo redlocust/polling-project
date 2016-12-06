@@ -1,6 +1,7 @@
 //DO Crit Add MongoDB
 //DO Crit Passport support
 //TODO Crit Добавить сохранение выборов для пользователя
+//TODO Crit Добавить возможность делиться выбором в Твиттере
 //DO Crit Авторизация через Твиттер
 //DO Crit Список голосований созданных пользователем
 //DO Crit Удалять можно только свои голосования
@@ -50,6 +51,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(function(req, res, next) {
   res.locals.user = req.user || null;
   next();
+});
+
+app.use('/', function(err, req, res, next) {
+  res.send(err.message);
 });
 
 

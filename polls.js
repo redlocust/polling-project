@@ -26,10 +26,10 @@ router.get('/polls', function (req, res) {
 
 router.get("/polls/mypolls", function (req, res) {
 
-  Polls.find({"userId": req.user._id}, function (err, polls) {
+  Polls.find({"authorId": req.user._id}, function (err, polls) {
     if (err) throw err;
 
-    res.render('poll-mylist', {
+    res.render('poll-list', {
       "polls": polls
     });
 
@@ -41,10 +41,8 @@ router.get('/polls/:id', function (req, res) {
 
   var id = req.params.id;
 
-  Polls.find({"id": id}, function (err, polls) {
+  Polls.findOne({"id": id}, function (err, poll) {
     if (err) throw err;
-
-    var poll = polls[0];
 
     res.render('poll-item', {
       "poll": poll
@@ -57,6 +55,7 @@ router.get('/polls/:id', function (req, res) {
 router.post('/polls/:id', function (req, res) {
 
   var id = req.params.id;
+  var doublePolling;
 
   Polls.findOne({"id": id}, function (err, poll) {
     if (err) throw err;
@@ -66,16 +65,41 @@ router.post('/polls/:id', function (req, res) {
       if (choice.label === req.body.choice) {
         poll.markModified('answers');
         choice.count = choice.count + 1;
+
+        /// Find user's choice, second polling is restricted
+
+        var arr = choice.userChoices;
+        var isFind = false;
+
+        if (arr.length > 0) {
+          isFind = arr.find(function (elem) {
+            return elem === req.user._id;
+          });
+        }
+
+        if (!isFind) {
+          choice.userChoices.push(req.user._id)
+        } else {
+          doublePolling = true;
+        }
+
       }
     });
 
-    poll.save(function (err) {
-      if (err) throw err;
 
-      console.log('Poll successfully updated!');
-    });
+    if (!doublePolling) {
+      poll.save(function (err) {
+        if (err) throw err;
 
-    res.redirect('/polls/' + id);
+        console.log('Poll successfully updated!');
+        res.redirect('/polls/' + id);
+      });
+    } else {
+      res.render('error',
+                  {
+                    error : "alread polling"
+                  });
+    }
 
   });
 

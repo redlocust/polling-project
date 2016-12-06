@@ -4,7 +4,7 @@ html(lang='en')
 
         block title
         link(href='/css/bootstrap.min.css', rel='stylesheet')
-        link(href='./style.css', rel='stylesheet')
+        link(href='/style.css', rel='stylesheet')
     body
         .container
             .row
@@ -26,6 +26,9 @@ html(lang='en')
 
                                 li
                                     a(href='/polls/mypolls').btn.btn-default MyPolls
+
+                                li
+                                    a(href='/admin/add').btn.btn-default NewPoll
 
                                 li
                                     a(href='/auth/logout').btn.btn-default Logout

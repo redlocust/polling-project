@@ -21,7 +21,8 @@ router.post('/add', function (req, res) {
   answers = answers.map(function (elem) {
     return {
       "label": elem,
-      "count": 0
+      "count": 0,
+      "userChoices": []
     }
   });
 
@@ -29,7 +30,8 @@ router.post('/add', function (req, res) {
     "id": uuid,
     "question": question,
     "answers": answers,
-    "userId": req.user._id
+    "authorId": req.user._id,
+
   });
 
   newPoll.save(function (err) {

@@ -6,7 +6,7 @@ var pollSchema = new Schema(
     id: String,
     question: String,
     answers: Array,
-    userId: String
+    authorId: String,
   }
 );
 
