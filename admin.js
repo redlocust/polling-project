@@ -30,7 +30,7 @@ router.post('/add', function (req, res) {
     "id": uuid,
     "question": question,
     "answers": answers,
-    "authorId": req.user._id,
+    "authorId": req.user._id
 
   });
 

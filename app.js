@@ -5,12 +5,16 @@
 //DO Crit Авторизация через Твиттер
 //DO Crit Список голосований созданных пользователем
 //DO Crit Удалять можно только свои голосования
+//TODO As an authenticated user, I can share my polls with my friends.
+//TODO As an authenticated user, I can see the aggregate results of my polls
+//TODO Свои голосований можно менять, добавлять новые пункты
 
 //DO Err Не работает вид элемента
 //DO Err Диаграмма работает только с двумя выборами
 //DO Err Добавить пробел в поле с описанием в списке голосований
 //TODO Err Сделать инициализацию. Чтобы было хотя бы одно голосование
 //TODO Err Проверить на ошибки ввода
+//TODO Err Не работает удаление голосований из списка своих голосований
 
 //TODO Enhan Добавить React или Angular
 //DO Удаление голосований

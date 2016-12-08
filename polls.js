@@ -71,14 +71,23 @@ router.post('/polls/:id', function (req, res) {
         var arr = choice.userChoices;
         var isFind = false;
 
+
+        console.log(req.session.id);
+
         if (arr.length > 0) {
           isFind = arr.find(function (elem) {
-            return elem === req.user._id;
+            return ((elem == req.user.id) || (elem == req.user._id));
           });
         }
 
         if (!isFind) {
-          choice.userChoices.push(req.user._id)
+
+          if (req.user.id) {
+            choice.userChoices.push(req.user.id)
+          } else {
+            choice.userChoices.push(req.user._id)
+          }
+
         } else {
           doublePolling = true;
         }
@@ -96,9 +105,9 @@ router.post('/polls/:id', function (req, res) {
       });
     } else {
       res.render('error',
-                  {
-                    error : "alread polling"
-                  });
+        {
+          error: "alread polling"
+        });
     }
 
   });
