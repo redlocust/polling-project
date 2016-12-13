@@ -67,3 +67,16 @@ router.get('/delete/:idPoll', function (req, res) {
 
   res.redirect('/polls');
 });
+
+router.get('/edit/:idPoll', function (req, res) {
+
+  var idPoll = req.params.idPoll;
+
+  Polls.findOne({"id": idPoll}, function (err, poll) {
+    if (err) throw err;
+
+    res.render('edit-poll', { poll: poll });
+
+  });
+
+});

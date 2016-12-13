@@ -19,7 +19,14 @@ block content
                     select.form-control(name="choice")
                         each val, i in poll.answers
                             option(name="name")=  JSON.stringify(poll.answers[i]['label']).replace(/['"]+/g, '')
+
                     button(type="submit").btn.btn-primary Submit
+
+                .raw
+                        a.btn.btn-primary(href="https://twitter.com/intent/tweet?url="
+                        + url + "&text=" + poll.question + " VoteRex"): span.fa.fa-twitter Share on Twitter
+
+                a.btn.btn-primary(href="/admin/edit/#{poll.id}") Edit polling
 
             .col-md-3.col
 
@@ -30,8 +37,8 @@ block content
 
         var dataset = !{JSON.stringify(poll.answers)}
 
-            var width = 360;
-            var height = 360;
+            var width = 300;
+            var height = 300;
             var radius = Math.min(width, height) / 2;
             var color = d3.scaleOrdinal(d3.schemeCategory20b);
             var svg = d3.select('#chart')

@@ -30,7 +30,8 @@ router.get("/polls/mypolls", function (req, res) {
     if (err) throw err;
 
     res.render('poll-list', {
-      "polls": polls
+      "polls": polls,
+      "canDelete": true
     });
 
   });
@@ -45,7 +46,8 @@ router.get('/polls/:id', function (req, res) {
     if (err) throw err;
 
     res.render('poll-item', {
-      "poll": poll
+      "poll": poll,
+      "url": req.protocol + '://' + req.get('host') + req.originalUrl
     });
   });
 

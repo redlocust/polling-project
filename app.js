@@ -1,11 +1,11 @@
 //DO Crit Add MongoDB
 //DO Crit Passport support
 //TODO Crit Добавить сохранение выборов для пользователя
-//TODO Crit Добавить возможность делиться выбором в Твиттере
+//DO Crit Добавить возможность делиться выбором в Твиттере
 //DO Crit Авторизация через Твиттер
 //DO Crit Список голосований созданных пользователем
 //DO Crit Удалять можно только свои голосования
-//TODO As an authenticated user, I can share my polls with my friends.
+//DO As an authenticated user, I can share my polls with my friends.
 //TODO As an authenticated user, I can see the aggregate results of my polls
 //TODO Свои голосований можно менять, добавлять новые пункты
 
@@ -14,7 +14,7 @@
 //DO Err Добавить пробел в поле с описанием в списке голосований
 //TODO Err Сделать инициализацию. Чтобы было хотя бы одно голосование
 //TODO Err Проверить на ошибки ввода
-//TODO Err Не работает удаление голосований из списка своих голосований
+//DO Err Не работает удаление голосований из списка своих голосований
 
 //TODO Enhan Добавить React или Angular
 //DO Удаление голосований
