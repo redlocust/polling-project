@@ -10,11 +10,14 @@ block content
             .col-md-8.col-md-offset-2
                 h3 Edit poll "#{poll.question}"
 
-                each answer in poll.answers
+                each answer, i in poll.answers
                     .row
 
-                        form
-                            input(type="text" value="#{answer.label}")
+                        form.form-horizontal
+                            .form-group
+                                input(type="text" value="#{answer.label}")
+                                a(href="/polls/del-choice/#{poll.id}/#{i}", name = "choice#{i}").btn.btn-default Delete
 
-                button.btn.btn-default Cancel
-                button.btn.btn-danger Save poll
+                a(href='/polls/#{poll.id}').btn.btn-default Cancel
+                a(href='/polls/add-choice/#{poll.id}').btn.btn-default Add choice
+                button.btn.btn-danger Update poll

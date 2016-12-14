@@ -1,0 +1,19 @@
+extends layout
+
+block title
+
+    title Add new poll
+
+block content
+    .container
+        .raw
+            .col-md-8.col-md-offset-2
+                h1 Add a new choice!
+
+                form(method='post')
+                    .form-group
+                        label(for="question") Choice:
+                        input(type="text", name="question").form-control#question
+
+                    button.btn.btn-primary Make!
+                    a(href="/admin/edit/#{poll.id}").btn.btn-primary Cancel!

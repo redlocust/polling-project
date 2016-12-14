@@ -115,3 +115,69 @@ router.post('/polls/:id', function (req, res) {
   });
 
 });
+
+router.get('/polls/add-choice/:id', function (req, res) {
+
+  var id = req.params.id;
+
+  Polls.findOne({"id": id}, function (err, poll) {
+    if (err) throw err;
+
+    res.render('add-choice', {
+      "poll": poll
+    });
+  });
+
+});
+
+router.post('/polls/add-choice/:id', function (req, res) {
+
+  var id = req.params.id;
+
+  Polls.findOne({"id": id}, function (err, poll) {
+    if (err) throw err;
+
+    console.log(poll);
+
+    var answer = {
+      label: req.body.question,
+      count: 0,
+      userChoices: []
+    };
+
+    poll.markModified('answers');
+
+    poll.answers.push(answer);
+
+    poll.save(function (err) {
+      if (err) throw err;
+
+      console.log('Poll successfully updated!');
+      res.redirect('/polls/' + id);
+    });
+
+  });
+});
+
+router.get('/polls/del-choice/:id/:num', function (req, res) {
+
+  var id = req.params.id;
+  var num = req.params.num;
+
+  Polls.findOne({"id": id}, function (err, poll) {
+    if (err) throw err;
+
+    poll.markModified('answers');
+
+    poll.answers.splice(num, 1);
+
+    poll.save(function (err) {
+      if (err) throw err;
+
+      console.log('Poll successfully updated!');
+      res.redirect('/admin/edit/' + id);
+    });
+
+  });
+
+});
