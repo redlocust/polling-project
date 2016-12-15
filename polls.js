@@ -57,11 +57,28 @@ router.get('/polls/:id', function (req, res) {
 router.post('/polls/:id', function (req, res) {
 
   var id = req.params.id;
-  var doublePolling;
+
+  var ip = (req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  req.connection.socket.remoteAddress).split(",")[0];
+
+  //console.log(ip);
+
+  var userId;
+
+  if (typeof req.user !== 'undefined') {
+    userId = (req.user.id) || (req.user._id);
+  } else {
+    userId = ip;
+  }
+
+  //console.log("userID " + userId);
 
   Polls.findOne({"id": id}, function (err, poll) {
     if (err) throw err;
 
+    var doublePolling = false;
     var choises = poll.answers;
     choises.forEach(function (choice) {
       if (choice.label === req.body.choice) {
@@ -74,27 +91,22 @@ router.post('/polls/:id', function (req, res) {
         var isFind = false;
 
 
-        console.log(req.session.id);
+        //console.log(req.session.id);
 
         if (arr.length > 0) {
           isFind = arr.find(function (elem) {
-            return ((elem == req.user.id) || (elem == req.user._id));
+            return elem == userId;
           });
         }
 
-        if (!isFind) {
-
-          if (req.user.id) {
-            choice.userChoices.push(req.user.id)
-          } else {
-            choice.userChoices.push(req.user._id)
-          }
+        if (isFind) {
+          doublePolling = true;
 
         } else {
-          doublePolling = true;
+          choice.userChoices.push(userId)
         }
-
       }
+
     });
 
 
@@ -108,7 +120,7 @@ router.post('/polls/:id', function (req, res) {
     } else {
       res.render('error',
         {
-          error: "alread polling"
+          error: "already polling"
         });
     }
 
