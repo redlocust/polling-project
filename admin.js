@@ -65,7 +65,7 @@ router.get('/delete/:idPoll', function (req, res) {
     });
   });
 
-  res.redirect('/polls');
+  res.redirect('/polls/mypolls');
 });
 
 router.get('/edit/:idPoll', function (req, res) {

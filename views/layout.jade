@@ -19,10 +19,13 @@ html(lang='en')
                             li.active
                                 a(href='/') Home
                         ul.nav.navbar-nav.navbar-right
-                            li
-                                a(href='/auth/login').btn.btn-default Login
-                            li
-                                a(href='/auth/twitter').btn.btn-default.btn-twitter Twitter
+
+                            if !user
+
+                                li
+                                    a(href='/auth/login').btn.btn-default Login
+                                li
+                                    a(href='/auth/twitter').btn.btn-default.btn-twitter Twitter
 
                             if user
 

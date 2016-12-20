@@ -7,7 +7,7 @@ block title
 block content
     .container
         .raw
-            .col-md-8.col-md-offset-2
+            .col-md-8.col-md-offset-2.jumbotron
                 h3 Edit poll "#{poll.question}"
 
                 each answer, i in poll.answers
@@ -16,7 +16,7 @@ block content
                         form.form-horizontal
                             .form-group
                                 input(type="text" value="#{answer.label}")
-                                a(href="/polls/del-choice/#{poll.id}/#{i}", name = "choice#{i}").btn.btn-default Delete
+                                a(href="/polls/del-choice/#{poll.id}/#{i}", name = "choice#{i}").btn.btn-default X
 
                 a(href='/polls/#{poll.id}').btn.btn-default Cancel
                 a(href='/polls/add-choice/#{poll.id}').btn.btn-default Add choice
