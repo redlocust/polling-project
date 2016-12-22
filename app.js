@@ -27,7 +27,7 @@
 var express = require('express');
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/polling");
+mongoose.connect("mongodb://mongo/polling");
 
 var User = require("./models/user");
 
