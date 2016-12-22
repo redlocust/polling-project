@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a07796d6-9b76-47f1-bb35-4ac97ddb2796" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auth-init.js" afterPath="$PROJECT_DIR$/auth-init.js" />
     </list>
     <ignored path="polling-project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="29" column="33" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="182">
+              <caret line="59" column="10" lean-forward="false" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -42,8 +42,8 @@
       <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+            <state relative-caret-position="675">
+              <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -52,18 +52,18 @@
       <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-650">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="82">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth-init.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="auth-init.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auth-init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+            <state relative-caret-position="175">
+              <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -151,6 +151,8 @@
       <find>_id</find>
       <find>poll-ite</find>
       <find>consol</find>
+      <find>loca</find>
+      <find>127</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,7 +177,6 @@
         <option value="$PROJECT_DIR$/views/login.pug" />
         <option value="$PROJECT_DIR$/auth-ini.js" />
         <option value="$PROJECT_DIR$/views/logout.jade" />
-        <option value="$PROJECT_DIR$/auth-init.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
         <option value="$PROJECT_DIR$/views/poll-mylist.jade" />
         <option value="$PROJECT_DIR$/models/polls.js" />
@@ -193,6 +194,7 @@
         <option value="$PROJECT_DIR$/views/edit-poll.jade" />
         <option value="$PROJECT_DIR$/public/style.css" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/auth-init.js" />
       </list>
     </option>
   </component>
@@ -493,12 +495,12 @@
       <workItem from="1482299711446" duration="2485000" />
       <workItem from="1482384483201" duration="408000" />
       <workItem from="1482389243258" duration="237000" />
-      <workItem from="1482398853718" duration="102000" />
+      <workItem from="1482398853718" duration="1051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="299733000" />
+    <option name="totallyTimeSpent" value="300682000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -840,34 +842,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auth-init.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+        <state relative-caret-position="182">
+          <caret line="59" column="10" lean-forward="false" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state relative-caret-position="675">
+          <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-650">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="82">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/auth-init.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
-          <caret line="29" column="33" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
           <folding />
         </state>
       </provider>
