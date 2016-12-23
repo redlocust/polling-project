@@ -39,7 +39,7 @@ passport.use(new LocalStrategy(
 passport.use(new TwitterStrategy({
     consumerKey: "Vhjg3SqSp5SNzABW9aDWVRDmC",
     consumerSecret: "LOr1WKkvusbAO71k7w0XSh3AEPGKlpWXuKrvBlqvvsoviEkVYQ",
-    callbackURL: "http://35.162.43.135:3000/auth/twitter/callback"
+    callbackURL: "http://35.162.43.135:80/auth/twitter/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
